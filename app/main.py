@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from routes.pdf import pdf_router
+from .routes.pdf import pdf_router
 from fastapi.middleware.cors import CORSMiddleware
 
 
@@ -10,6 +10,7 @@ app.include_router(pdf_router, prefix="/api/pdf")
 # Configuración de CORS
 origins = [
     "http://localhost:3000",  # React local
+    "http://localhost:5173",
     # Añadir otros orígenes aquí, como el dominio en producción
 ]
 

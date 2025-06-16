@@ -48,24 +48,25 @@ git clone https://github.com/tuusuario/conectacare-backend.git
 cd conectacare-backend
 
 ### Crea un entorno virtual y actívalo:
-
+```bash
 python -m venv venv
 source venv/bin/activate #Linux o Mac
 venv\Scripts\activate #Windows
-
+```
 ### Instala dependencias
+```bash
 pip install -r requirements.txt
-
+```
 ### Ejecuta el servidor
-
-uvicorn main:app --reload
-
+```bash
+uvicorn main:app --reload --port 8001
+```
 
 #### 🧪 Ejemplo de uso:
 
 
 ```bash
-curl -X GET http://localhost:8000/patient/66486fe15fa223334db17bdf --output paciente.pdf
-
+curl -X GET http://localhost:8001/patient/66486fe15fa223334db17bdf --output paciente.pdf
+```
 
 
