@@ -50,7 +50,8 @@ cd conectacare-backend
 ### Crea un entorno virtual y actívalo:
 
 python -m venv venv
-source venv/bin/activate  # o venv\Scripts\activate en Windows
+source venv/bin/activate #Linux o Mac
+venv\Scripts\activate #Windows
 
 ### Instala dependencias
 pip install -r requirements.txt
