@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException, Response
 from starlette.responses import StreamingResponse
-from app.services.pdf_service import build_patient_dashboard_pdf
-from app.routes.client import client
+from services.pdf_service import build_patient_dashboard_pdf
+from routes.client import client
 
 from pymongo import MongoClient
 from bson import ObjectId, errors as bson_errors

@@ -23,8 +23,10 @@ def build_patient_dashboard_pdf(patient: dict) -> BytesIO:
     elements.append(Spacer(1, 12))
 
     # Basic Info
-    elements.append(Paragraph(f"Paciente: {patient.get('full_name', '')}", styles['Heading2']))
-    elements.append(Paragraph(f"Edad: {patient.get('age', '')}", styles['Normal']))
+    elements.append(Paragraph(f"Paciente: {patient.get('name', '')} {patient.get('last_name', '')}", styles['Heading2']))
+    elements.append(Paragraph(f"Fecha de nacimiento: {patient.get('birth_date', '')}", styles['Normal']))
+    elements.append(Paragraph(f"Edad: {patient.get('age', '')} años", styles['Normal']))
+    elements.append(Paragraph(f"Documento: {patient.get('document', '')}", styles['Normal']))
     elements.append(Paragraph(f"Colesterol: {patient.get('cholesterol', '')} mg/dL", styles['Normal']))
     elements.append(Paragraph(f"Glucosa: {patient.get('glucose', '')} mg/dL", styles['Normal']))
     elements.append(Paragraph(f"Nivel de Actividad: {patient.get('activity_level', '')}", styles['Normal']))
@@ -47,17 +49,35 @@ def build_patient_dashboard_pdf(patient: dict) -> BytesIO:
         elements.append(t)
     elements.append(Spacer(1, 12))
 
-    # Weight by Month
-    elements.append(Paragraph("Peso por Mes", styles['Heading3']))
-    weights = [
+    # # Weight by Month
+    # elements.append(Paragraph("Peso por Mes", styles['Heading3']))
+    # weights = [
+    #     {
+    #         "Mes": w.get("month", ""),
+    #         "Peso (kg)": w.get("value", "")
+    #     }
+    #     for w in patient.get("weight_by_month", [])
+    # ]
+    # if weights:
+    #     table_data = [list(weights[0].keys())] + [list(row.values()) for row in weights]
+    #     t = Table(table_data, repeatRows=1)
+    #     t.setStyle(TableStyle([('BACKGROUND', (0,0), (-1,0), colors.lightgrey),('GRID', (0,0), (-1,-1), 0.5, colors.black)]))
+    #     elements.append(t)
+    # elements.append(Spacer(1, 12))
+
+    # Vital Signs
+    elements.append(Paragraph("Signos Vitales", styles['Heading3']))
+    vitals = [
         {
-            "Mes": w.get("month", ""),
-            "Peso (kg)": w.get("value", "")
+            "Fecha": date_fmt(v.get("datetime")),
+            "Frecuencia Cardíaca": v.get("heart_rate", ""),
+            "Peso": v.get("daily_weight", ""),
+            "Presión Arterial": f"{v.get('blood_pressure', {}).get('systolic', '')}/{v.get('blood_pressure', {}).get('diastolic', '')}"
         }
-        for w in patient.get("weight_by_month", [])
+        for v in patient.get("vital_signs", [])
     ]
-    if weights:
-        table_data = [list(weights[0].keys())] + [list(row.values()) for row in weights]
+    if vitals:
+        table_data = [list(vitals[0].keys())] + [list(row.values()) for row in vitals]
         t = Table(table_data, repeatRows=1)
         t.setStyle(TableStyle([('BACKGROUND', (0,0), (-1,0), colors.lightgrey),('GRID', (0,0), (-1,-1), 0.5, colors.black)]))
         elements.append(t)

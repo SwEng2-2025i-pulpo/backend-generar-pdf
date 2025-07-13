@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from .routes.pdf import pdf_router
+from routes.pdf import pdf_router
 from fastapi.middleware.cors import CORSMiddleware
 
 
@@ -23,4 +23,4 @@ app.add_middleware(
 )
 
 
-# uvicorn main:app --reload
+# uvicorn main:app --reload --port 8001
