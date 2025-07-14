@@ -1,15 +1,14 @@
 from fastapi import APIRouter, HTTPException, Response
 from starlette.responses import StreamingResponse
 from services.pdf_service import build_patient_dashboard_pdf
-from routes.client import client
-
+from routes.client import db_client
 from pymongo import MongoClient
 from bson import ObjectId, errors as bson_errors
 
 pdf_router = APIRouter()
 
 
-patients = client["conectacare"]["patient"]
+patients = db_client["conectacare"]["patient"]
 
 @pdf_router.get("/patient/{patient_id}")
 def patient_pdf(patient_id: str):
