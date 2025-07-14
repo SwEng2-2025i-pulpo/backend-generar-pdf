@@ -2,4 +2,5 @@ fastapi
 uvicorn
 pymongo
 reportlab
-python-dotenv  # Opcional, si manejas variables de entorno para la conexión Mongo
+python-dotenv
+prometheus_client
