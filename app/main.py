@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Request
 from fastapi.responses import Response
-from routes.pdf import pdf_router
+from app.routes.pdf import pdf_router
 from fastapi.middleware.cors import CORSMiddleware
 from prometheus_client import Counter, Histogram, generate_latest, CONTENT_TYPE_LATEST
 import time
